@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class CurrentMigrantWorker extends Model
+{
+    protected $fillable = [
+        'name',
+        'gender',
+        'age',
+        'contact_no',
+        'caste',
+        'maritial_status',
+        'total_family_returned',
+        'total_family_returned_male',
+        'total_family_returned_female',
+        'total_family_returned_other',
+        'migrated_country',
+        'home_returned_after',
+        'home_return_reason',
+        'want_to_go_again',
+        'occupation_now',
+        'is_employed',
+        'employed_as',
+        'skill_before_migration',
+        'skilled_occupation',
+        'know_skill_test',
+        'have_know_skill_test',
+        'want_to_skill_test',
+        'foreign_income_used_for',
+        'saved_foriegn_income',
+        'plan_to_business',
+        'business_plan',
+        'doing_business',
+        'current_business',
+        'emplyees_on_current_business',
+        'business_help_government',
+        'want_help_type_from_business',
+        'difficulties_to_start_business',
+    ];
+}
