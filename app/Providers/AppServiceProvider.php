@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Request $request): void
     {
         // URL::forceScheme('https');
-        // Gate::policy(\Spatie\Activitylog\Models\Activity::class, \App\Policies\ActivityPolicy::class);
+        Gate::policy(\Spatie\Activitylog\Models\Activity::class, \App\Policies\ActivityPolicy::class);
     }
 }
