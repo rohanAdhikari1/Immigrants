@@ -100,10 +100,6 @@ class RecordCollectorUsersResource extends Resource
                             ->label('Last Name')
                             ->maxLength(255)
                             ->required(),
-                        Forms\Components\TextInput::make('counsil_no')
-                            ->label('Council Registration No')
-                            ->numeric()
-                            ->maxLength(255),
                         Forms\Components\TextInput::make('primary_phone')
                             ->unique(ignoreRecord: true)
                             ->label('Primary Phone')
@@ -118,16 +114,6 @@ class RecordCollectorUsersResource extends Resource
                                     ->unique(ignoreRecord: true)
                                     ->label('Email')
                                     ->maxLength(255),
-                                Forms\Components\Select::make('qualification')
-                                    ->options([
-                                        'VAHW' => 'VAHW',
-                                        'JTA' => 'JTA',
-                                        'JT' => 'JT',
-                                        'Veterinary Doctor' => 'Veterinary Doctor',
-                                        'Others' => 'Others',
-                                    ])
-                                    ->searchable()
-                                    ->preload(),
                             ])
                             ->columns(2),
                         Forms\Components\Textarea::make('address')
