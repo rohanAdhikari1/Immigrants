@@ -16,6 +16,7 @@ class ReportsController extends Controller
     public function save(Request $request)
     {
         $validated = $request->validate([
+            //step first
             'type' => 'required',
             'house_representative_name' => 'required',
             'house_representative_gender' => 'required',
@@ -47,6 +48,7 @@ class ReportsController extends Controller
             'migrated_country' => 'required',
             'migrated_times' => 'required|numeric',
 
+
             ///current migrant worker
             //part 1
             'name' => 'required',
@@ -68,7 +70,68 @@ class ReportsController extends Controller
             'fe_fee' => 'nullable',
             'fe_fee_paid_method' => 'nullable',
             //part 3
+            'foreign_occupation' => 'nullable',
+            'faced_problems_abroad' => 'boolean|nullable',
+            'home_problem' => 'boolean|nullable',
+            'problem_type' => 'nullable',
+            'home_problem_type' => 'nullable',
+            //part 5
+            'remarried_gender' => 'nullable',
+            'is_elder_only_home' => 'boolean|nullable',
+            'is_children_out_for_study' => 'boolean|nullable',
+            'children_out_for_study' => 'nullable',
+            'have_send_money' => 'boolean|nullable',
+            'money_not_send_problem' => 'nullable',
+            'remittance_count' => 'nullable',
+            'remittance_amount' => 'nullable',
+            //part 6
+            'remittance_spend_source' => 'nullable',
+            'land_purchased' => 'boolean|nullable',
+            'land_purchased_location' => 'nullable',
+            'remittance_saving_method' => 'nullable',
+            'migration_plan_location' => 'nullable',
+            'plan_after_return' => 'nullable',
 
+
+            //return migrant worker
+            //part 1
+            'name' => 'nullable',
+            'age' => 'nullable|numeric',
+            'gender' => 'nullable',
+            'contact_no' => 'nullable',
+            'relation_to_hr' => 'nullable',
+            'education_status' => 'nullable',
+            'marital_status' => 'nullable',
+            'migrated_country' => 'nullable',
+            'home_returned_after' => 'nullable',
+            'home_returned_after_duration' => 'nullable',
+            'home_return_reason' => 'nullable',
+            'total_family_returned_male' => 'nullable|numeric',
+            'total_family_returned_female' => 'nullable|numeric',
+
+            //part 2
+            'want_to_go_again' => 'boolean|nullable',
+            'is_disabled_on_foreign' => 'boolean|nullable',
+            'work_on_foreign' => 'boolean|nullable',
+            'work_exp_on_fe' => 'boolean|nullable',
+            'skill_training_after_return' => 'boolean|nullable',
+            'occupation_now' => 'nullable',
+            'business_type' => 'nullable',
+
+            //part 3
+            'difficulties_to_start_business' => 'nullable',
+            'desired_or_current_work_area_in_nepal' => 'nullable',
+            'requirements_for_employment_in_nepal' => 'nullable',
+
+            //part 4
+            'post_foreign_employment_family_issues' => 'nullable|boolean',
+            'post_foreign_employment_family_issues_type' => 'nullable',
+            'post_foreign_employment_family_issues_type_other' => 'nullable',
+            'post_foreign_employment_health_issues' => 'nullable|boolean',
+            'post_foreign_employment_health_issues_type' => 'nullable',
+            'post_foreign_employment_health_issues_type_other' => 'nullable',
+            'post_foreign_employment_social_or_family_accusations' => 'nullable|boolean',
+            'post_foreign_employment_social_or_family_accusations_type' => 'nullable',
         ]);
         if (Auth::user()->is_active) {
             DB::beginTransaction();
