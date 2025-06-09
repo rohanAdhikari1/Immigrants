@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('family_members_male_count')->nullable();
             $table->integer('family_members_female_count')->nullable();
             $table->integer('family_members_other_count')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

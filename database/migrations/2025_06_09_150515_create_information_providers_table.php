@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('ethinic_group')->nullable();
             $table->string('mother_tongue')->nullable();
             $table->string('religion')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }
