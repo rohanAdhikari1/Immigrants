@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('returnmigrant', [ReportsController::class, 'save'])->name('save_record');
-    Route::post('currentmigrant', [ReportsController::class, 'store'])->name('store_record');
+    Route::post('migrant', [ReportsController::class, 'save'])->name('save_record');
+    // Route::post('currentmigrant', [ReportsController::class, 'store'])->name('store_record');
 });
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
