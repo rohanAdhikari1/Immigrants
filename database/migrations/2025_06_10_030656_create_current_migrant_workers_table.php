@@ -39,8 +39,8 @@ return new class extends Migration
             $table->string('family_problems_during_foreign_employment_type')->nullable();
             $table->string('second_marriage_done_by')->nullable();
             $table->boolean('only_elder_at_home_due_to_foreign_employment')->nullable();
-            $table->boolean('is_children_sent_to_boarding_school_in_headquarters_or_other_city')->nullable();
-            $table->string('children_sent_to_boarding_school_in_headquarters_or_other_city')->nullable();
+            $table->boolean('is_children_sent_to_other_city')->nullable();
+            $table->string('children_sent_to_other_city')->nullable();
             $table->boolean('is_amount_sent_at_home_last_1_year')->nullable();
             $table->string('reason_for_not_sending_money')->nullable();
             $table->string('times_money_sent_home_last_1_year')->nullable(); //25

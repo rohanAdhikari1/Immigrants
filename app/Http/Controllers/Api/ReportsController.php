@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\CurrentMigrantWorker;
 use App\Models\Household;
-use App\Models\HouseRepresentative;
 use App\Models\InformationProvider;
-use App\Models\MigrantWorker;
 use App\Models\Muncipality;
 use App\Models\ReturnedMigrantWorker;
 use Exception;
@@ -54,7 +52,7 @@ class ReportsController extends Controller
             'marital_status' =>  'nullable',
             'migrated_country' => 'nullable',
             'relation_to_hr' => 'nullable',
-            'migrated_times' => 'numeric',
+            'migrated_times' => 'nullable|numeric',
             'education_status' => 'nullable',
 
 
@@ -110,10 +108,10 @@ class ReportsController extends Controller
 
             //part 2
             'want_to_go_again' => 'boolean|nullable',
-            'is_disabled_on_foreign' => 'boolean|nullable',
-            'work_on_foreign' => 'boolean|nullable',
-            'work_exp_on_fe' => 'boolean|nullable',
-            'skill_training_after_return' => 'boolean|nullable',
+            'is_disabled_on_foreign' => 'nullable',
+            'work_on_foreign' => 'nullable',
+            'work_exp_on_fe' => 'nullable',
+            'skill_training_after_return' => 'nullable',
             'occupation_now' => 'nullable',
             'business_type' => 'nullable',
 
