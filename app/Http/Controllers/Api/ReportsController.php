@@ -9,6 +9,7 @@ use App\Models\HouseRepresentative;
 use App\Models\InformationProvider;
 use App\Models\MigrantWorker;
 use App\Models\Muncipality;
+use App\Models\ReturnedMigrantWorker;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -172,6 +173,7 @@ class ReportsController extends Controller
                     CurrentMigrantWorker::create([
                         'household_id' => $houseHold->id,
                         'information_provider_id' => $informationProvider->id,
+
                         'name' => $validated['name'],
                         'gender' => $validated['gender'],
                         'age' => $validated['age'],
@@ -219,6 +221,48 @@ class ReportsController extends Controller
                         'created_by' => Auth::id(),
                     ]);
                 } else {
+                    ReturnedMigrantWorker::create([
+                        'household_id' => $houseHold->id,
+                        'information_provider_id' => $informationProvider->id,
+
+                        'name' => $validated['name'],
+                        'number_of_person' => $validated['total_family_returned_male'] + $validated['total_family_returned_female'],
+                        'age' => $validated['age'],
+                        'gender' => $validated['gender'],
+                        'contact_no' => $validated['contact_no'],
+                        'relation_to_hr' => $validated['relation_to_hr'],
+                        'education_detail' => $validated['education_status'],
+                        'maritial_status' => $validated['marital_status'],
+                        'foreign_country' => $validated['migrated_country'],
+                        'years_since_returned' => $validated['home_returned_after'] . ' ' . $validated['home_returned_after_duration'],
+                        'reason_for_returning_from_foreign_employment' => $validated['home_return_reason'],
+
+                        'disability_or_incapacity_due_to_foreign_employment' => $validated['is_disabled_on_foreign'],
+                        'type_of_work_done_abroad' => $validated['work_on_foreign'],
+                        'work_experience_during_foreign_employment' => $validated['work_exp_on_fe'],
+                        'skill_training_after_return_to_nepal' => $validated['skill_training_after_return'],
+                        'current_occupation' => $validated['occupation_now'],
+                        'type_of_own_business' => $validated['business_type'],
+
+                        'challenges_in_starting_new_business' => $validated['difficulties_to_start_business'],
+                        'intention_to_return_to_foreign_employment' => $validated['want_to_go_again'],
+                        'desired_or_current_work_area_in_nepal' => $validated['desired_or_current_work_area_in_nepal'],
+                        'requirements_for_employment_in_nepal' => $validated['requirements_for_employment_in_nepal'],
+
+                        'post_foreign_employment_family_issues' => $validated['post_foreign_employment_family_issues'],
+                        'post_foreign_employment_family_issues_type' => $validated['post_foreign_employment_family_issues_type'],
+                        'post_foreign_employment_family_issues_type_other' => $validated['post_foreign_employment_family_issues_type_other'],
+                        'post_foreign_employment_health_issues' => $validated['post_foreign_employment_health_issues'],
+                        'post_foreign_employment_health_issues_type' => $validated['post_foreign_employment_health_issues_type'],
+                        'post_foreign_employment_health_issues_type_other' => $validated['post_foreign_employment_health_issues_type_other'],
+                        'post_foreign_employment_social_or_family_accusations' => $validated['post_foreign_employment_social_or_family_accusations'],
+                        'post_foreign_employment_social_or_family_accusations_type' => $validated['post_foreign_employment_social_or_family_accusations_type'],
+
+                        'latitude' => $validated['latitude'],
+                        'longitude' => $validated['longitude'],
+                        'municipality_id' => $munciplaity,
+                        'created_by' => Auth::id(),
+                    ]);
                 }
 
                 DB::commit();

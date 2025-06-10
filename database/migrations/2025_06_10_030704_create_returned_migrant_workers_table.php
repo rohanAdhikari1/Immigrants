@@ -33,7 +33,6 @@ return new class extends Migration
             $table->string('current_occupation')->nullable();
             $table->string('type_of_own_business')->nullable();
             $table->string('challenges_in_starting_new_business')->nullable();
-            $table->string('challenges_in_starting_new_business')->nullable();
             $table->boolean('intention_to_return_to_foreign_employment')->nullable();
             $table->string('desired_or_current_work_area_in_nepal')->nullable();
             $table->string('requirements_for_employment_in_nepal')->nullable(); //20
