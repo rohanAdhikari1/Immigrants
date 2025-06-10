@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Household;
 use App\Models\HouseRepresentative;
+use App\Models\InformationProvider;
 use App\Models\MigrantWorker;
 use App\Models\Muncipality;
 use Exception;
@@ -39,6 +41,7 @@ class ReportsController extends Controller
             'religion' => 'nullable',
             'toll_name' => 'nullable',
             'toll_no' => 'nullable',
+            'created_at' => 'nullable',
 
 
             ///current migrant worker
@@ -124,124 +127,42 @@ class ReportsController extends Controller
             'post_foreign_employment_health_issues_type_other' => 'nullable',
             'post_foreign_employment_social_or_family_accusations' => 'nullable|boolean',
             'post_foreign_employment_social_or_family_accusations_type' => 'nullable',
+
+            //location
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
         ]);
         if (Auth::user()->is_active) {
             DB::beginTransaction();
             try {
                 $munciplaity = Muncipality::where('name', "")->pluck('id')->first();
-                $houseRepresentative = HouseRepresentative::create([
-                    'name' => $validated['house_representative_name'],
-                    'gender' => $validated['house_representative_gender'],
-                    'contact_no' => $validated['house_representative_contact_no'],
-                    'occupation' => $validated['house_representative_occupation'],
-                    'address' => $validated['house_representative_address'],
-                    'family_memeber_count' => $validated['family_memeber_count'],
+
+                $houseHold = Household::create([
+                    'muncipality_id' => $munciplaity,
+                    'ward_no' => $validated['ward_no'],
+                    'toll_name' => $validated['toll_name'],
+                    'toll_no' => $validated['toll_no'],
+                    'house_no' => $validated['house_no'],
+                    'visit_date' => $validated['created_at'],
+                    'latitude' => $validated['latitude'],
+                    'longitude' => $validated['longitude'],
+                    'house_representative_name' => $validated['house_representative_name'],
+                    'house_represent_gender' => $validated['house_representative_gender'],
+                    'house_represent_contact_no' => $validated['house_representative_contact_no'],
+                    'house_represent_occupation' => $validated['house_representative_occupation'],
+                    'family_member_count' => $validated['family_memeber_count'],
                     'family_members_male_count' => $validated['family_members_male_count'],
                     'family_members_female_count' => $validated['family_members_female_count'],
                     'family_members_other_count' => $validated['family_members_other_count'],
-                    'family_migration_count' => $validated['family_migration_count'],
-                    'family_members_migration_male_count' => $validated['family_members_migration_male_count'],
-                    'family_members_migration_female_count' => $validated['family_members_migration_female_count'],
-                    'family_members_migration_other_count' => $validated['family_members_migration_other_count'],
-                    'muncipality_id' => $munciplaity,
-                    'ward_no' => $validated['ward_no'],
-                    'address_1' => $validated['address_1'],
-                    'address_2' => $validated['address_2'],
-                    'house_no' => $validated['house_no'],
                     'created_by' => Auth::id(),
                 ]);
-                return response()->json(
-                    [
-                        'status' => false,
-                        'message' => $houseRepresentative
-                    ],
-                    500
-                );
-
-                MigrantWorker::create([
-                    'house_representative_id' => $houseRepresentative->id,
-                    'type' => $validated['type'],
-                    'name' => $validated['name'],
-                    'gender' => $validated['gender'],
-                    'age' => $validated['age'],
-                    'contact_no' => $validated['contact_no'],
-                    'caste' => $validated['caste'],
-                    'maritial_status' =>  $validated['marital_status'],
-                    'migrated_country' => $validated['migrated_country'],
-                    'migrated_times' => $validated['migrated_times'],
-                    'foreign_occupation' => $validated['foreign_occupation'],
-                    'home_contact_times' => $validated['home_contact_times'],
-                    'is_skilled' => $validated['is_skilled'],
-                    'skilled_occupation' => $validated['skilled_occupation'],
-                    'have_coomunication_permission' => $validated['have_communication_permission'],
-                    'communication_permission_method' => $validated['communication_permission_method'],
-                    'have_document_in_home' => $validated['have_document_in_home'],
-                    'document_type' => $validated['document_type'],
-                    'travel_methosd' => $validated['travel_method'],
-                    'travel_road' => $validated['travel_road'],
-                    'travel_fee' => $validated['travel_fee'],
-                    'expense_source_abroad' => $validated['expense_source_abroad'],
-                    'loan_taken_from' => $validated['loan_taken_from'],
-                    'interest_rate_on_loan' => $validated['interest_rate_on_loan'],
-                    'is_loan_fully_repaid' => $validated['is_loan_fully_repaid'],
-                    'loan_repayment_duration' => $validated['loan_repayment_duration'],
-                    'faced_problems_abroad' => $validated['faced_problems_abroad'],
-                    'problem_type' => $validated['problem_type'],
-                    'have_covid_related_problem' => $validated['have_covid_related_problem'],
-                    'covid_problem_type' => $validated['covid_problem_type'],
-                    'covid_health_issue' => $validated['covid_health_issue'],
-                    'covid_health_issue_type' => $validated['covid_health_issue_type'],
-                    'emergency_contact_number' => $validated['emergency_contact_number'],
-                    'home_problem' => $validated['home_problem'],
-                    'home_problem_type' => $validated['home_problem_type'],
-                    'is_remarried' => $validated['is_remarried'],
-                    'remarried_gender' => $validated['remarried_gender'],
-                    'is_elder_only_home' => $validated['is_elder_only_home'],
-                    'is_childer_out_for_study' => $validated['is_children_out_for_study'],
-                    'children_study_location' => $validated['children_study_location'],
-                    'total_foreign_income' => $validated['total_foreign_income'],
-                    'remittance_method' => $validated['remittance_method'],
-                    'is_salary_changed_due_to_covid' => $validated['is_salary_changed_due_to_covid'],
-                    'salary_change' => $validated['salary_change'],
-                    'remeittance_before_covid' => $validated['remittance_before_covid'],
-                    'previous_year_remeittance_count' => $validated['previous_year_remittance_count'],
-                    'previous_year_remeittance_amount' => $validated['previous_year_remittance_amount'],
-                    'remittance_spend_source' => $validated['remittance_spend_source'],
-                    'is_remittance_saved' => $validated['is_remittance_saved'],
-                    'remittance_saving_method' => $validated['remittance_saving_method'],
-                    'plan_after_return' => $validated['plan_after_return'],
-                    'is_land_purchased' => $validated['is_land_purchased'],
-                    'land_purchased_location' => $validated['land_purchased_location'],
-                    'have_plan_to_migrate' => $validated['have_plan_to_migrate'],
-                    'migration_plan_location' => $validated['migration_plan_location'],
-                    'is_other_member_also_on_foreign' => $validated['is_other_member_also_on_foreign'],
-
-                    'total_family_returned' => $validated['total_family_returned'],
-                    'total_family_returned_male' => $validated['total_family_returned_male'],
-                    'total_family_returned_female' => $validated['total_family_returned_female'],
-                    'total_family_returned_other' => $validated['total_family_returned_other'],
-                    'home_returned_after' => $validated['home_returned_after'],
-                    'home_return_reason' => $validated['home_return_reason'],
-                    'want_to_go_again'  => $validated['want_to_go_again'],
-                    'occupation_now' => $validated['occupation_now'],
-                    'is_employed' => $validated['is_employed'],
-                    'employed_as' => $validated['employed_as'],
-                    'skill_before_migration' => $validated['skill_before_migration'],
-                    'skilled_occupation' => $validated['skilled_occupation'],
-                    'know_skill_test' => $validated['know_skill_test'],
-                    'have_know_skill_test' => $validated['have_done_skill_test'],
-                    'want_to_skill_test' => $validated['want_to_skill_test'],
-                    'foreign_income_used_for' => $validated['foreign_income_used_for'],
-                    'saved_foriegn_income' => $validated['saved_foreign_income'],
-                    'plan_to_business' => $validated['plan_to_business'],
-                    'business_plan' => $validated['business_plan'],
-                    'doing_business' => $validated['doing_business'],
-                    'current_business' => $validated['current_business'],
-                    'emplyees_on_current_business' => $validated['employees_on_current_business'],
-                    'business_help_government' => $validated['business_help_government'],
-                    'want_help_type_from_business' => $validated['want_help_type_from_business'],
-                    'difficulties_to_start_business' => $validated['difficulties_to_start_business'],
-                    'created_by' => Auth::id(),
+                $informationProvider = InformationProvider::create([
+                    'name' => $validated['information_provider_name'],
+                    'relation_to_hr' => $validated['ip_relation_to_hr'],
+                    'ethinic_group' => $validated['information_provider_caste'],
+                    'mother_tongue' => $validated['information_provider_mother_tongue'],
+                    'religion' => $validated['religion'],
+                    'created_by' => $validated['created_by']
                 ]);
 
                 DB::commit();
