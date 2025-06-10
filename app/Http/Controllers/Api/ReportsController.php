@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\CurrentMigrantWorker;
 use App\Models\Household;
 use App\Models\HouseRepresentative;
 use App\Models\InformationProvider;
@@ -49,12 +50,13 @@ class ReportsController extends Controller
             'name' => 'required',
             'gender' => 'required',
             'age' => 'numeric',
-            'contact_no' => 'nullable',
-            'caste' => 'nullable',
             'marital_status' =>  'nullable',
             'migrated_country' => 'nullable',
+            'relation_to_hr' => 'nullable',
             'migrated_times' => 'numeric',
             'education_status' => 'nullable',
+
+
             //part 2
             'travel_method' => 'nullable',
             'travel_road' => 'nullable',
@@ -86,6 +88,7 @@ class ReportsController extends Controller
             'remittance_saving_method' => 'nullable',
             'migration_plan_location' => 'nullable',
             'plan_after_return' => 'nullable',
+            'remittance_collect_method' => 'nullable',
 
 
             //return migrant worker
@@ -164,6 +167,59 @@ class ReportsController extends Controller
                     'religion' => $validated['religion'],
                     'created_by' => $validated['created_by']
                 ]);
+
+                if ($validated['type'] == 'current') {
+                    CurrentMigrantWorker::create([
+                        'household_id' => $houseHold->id,
+                        'information_provider_id' => $informationProvider->id,
+                        'name' => $validated['name'],
+                        'gender' => $validated['gender'],
+                        'age' => $validated['age'],
+                        'marital_status' =>  $validated['marital_status'],
+                        'foreign_country' => $validated['migrated_country'],
+                        'relation_to_hr' => $validated['relation_to_hr'],
+                        'number_of_times_fe' => $validated['migrated_times'],
+                        'education_detail' => $validated['education_status'],
+
+                        'mode_of_travel' => $validated['travel_method'],
+                        'route_taken' => $validated['travel_road'],
+                        'visa_type' => $validated['visa_type'],
+                        'documents_left_on_home' => $validated['have_document_in_home'],
+                        'skill_training_before_foreign_employment' => $validated['is_skilled'],
+                        'received_information_or_counseling_before_foreign_employment' => $validated['have_communication_permission'],
+                        'amount_paid_for_foreign_employment' => $validated['fe_fee'],
+                        'major_source_of_amount_paid' => $validated['fe_fee_paid_method'],
+
+                        'current_job_abroad' => $validated['foreign_occupation'],
+                        'problems_faced_during_foreign_employment' => $validated['faced_problems_abroad'],
+                        'problems_faced_during_foreign_employment_type' => $validated['problem_type'],
+                        'family_problems_during_foreign_employment' => $validated['home_problem'],
+                        'family_problems_during_foreign_employment_type' => $validated['home_problem_type'],
+
+                        'second_marriage_done_by' => $validated['remarried_gender'],
+                        'only_elder_at_home_due_to_foreign_employment' => $validated['is_elder_only_home'],
+                        'is_children_sent_to_boarding_school_in_headquarters_or_other_city' => $validated['is_children_out_for_study'],
+                        'children_sent_to_boarding_school_in_headquarters_or_other_city' => $validated['children_out_for_study'],
+                        'is_amount_sent_at_home_last_1_year' => $validated['have_send_money'],
+                        'reason_for_not_sending_money' => $validated['money_not_send_problem'],
+                        'times_money_sent_home_last_1_year' => $validated['remittance_count'],
+                        'amount_sent_home_last_1_year' => $validated['remittance_amount'],
+
+                        'remittance_expenditure_last_1_year' => $validated['remittance_spend_source'],
+                        'place_of_purchase_of_house_or_land_from_remittance' => $validated['land_purchased_location'],
+                        'place_of_saving_remittance' => $validated['remittance_saving_method'],
+                        'place_of_receiving_money_from_abroad' => $validated['remittance_collect_method'],
+
+                        'migration_plan_location' => $validated['migration_plan_location'],
+                        'plan_after_return' => $validated['plan_after_return'],
+
+                        'latitude' => $validated['latitude'],
+                        'longitude' => $validated['longitude'],
+                        'municipality_id' => $munciplaity,
+                        'created_by' => Auth::id(),
+                    ]);
+                } else {
+                }
 
                 DB::commit();
                 return response()->json(

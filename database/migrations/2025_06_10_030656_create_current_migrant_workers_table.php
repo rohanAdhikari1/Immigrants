@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('family_problems_during_foreign_employment_type')->nullable();
             $table->string('second_marriage_done_by')->nullable();
             $table->boolean('only_elder_at_home_due_to_foreign_employment')->nullable();
+            $table->boolean('is_children_sent_to_boarding_school_in_headquarters_or_other_city')->nullable();
             $table->string('children_sent_to_boarding_school_in_headquarters_or_other_city')->nullable();
             $table->boolean('is_amount_sent_at_home_last_1_year')->nullable();
             $table->string('reason_for_not_sending_money')->nullable();
@@ -48,6 +49,9 @@ return new class extends Migration
             $table->string('place_of_purchase_of_house_or_land_from_remittance')->nullable(); //28
             $table->string('place_of_saving_remittance')->nullable(); //29
             $table->string('place_of_receiving_money_from_abroad')->nullable(); //30
+
+            $table->string('migration_plan_location')->nullable();
+            $table->string('plan_after_return')->nullable();
 
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
