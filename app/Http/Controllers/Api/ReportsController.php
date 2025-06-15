@@ -52,7 +52,7 @@ class ReportsController extends Controller
             'marital_status' =>  'nullable',
             'migrated_country' => 'nullable',
             'relation_to_hr' => 'nullable',
-            'migrated_times' => 'nullable|numeric',
+            'migrated_times' => 'nullable',
             'education_status' => 'nullable',
 
 
@@ -62,7 +62,7 @@ class ReportsController extends Controller
             'visa_type' => 'nullable',
             'is_skilled' => 'boolean|nullable',
             'have_communication_permission' => 'boolean|nullable',
-            'have_document_in_home' => 'boolean|nullable',
+            'have_document_in_home' => 'nullable',
             'fe_fee' => 'nullable',
             'fe_fee_paid_method' => 'nullable',
             //part 3
@@ -137,7 +137,7 @@ class ReportsController extends Controller
         if (Auth::user()->is_active) {
             DB::beginTransaction();
             try {
-                $munciplaity = Muncipality::where('name', "")->pluck('id')->first();
+                $munciplaity = Auth::user()->muncipality_id;
 
                 $houseHold = Household::create([
                     'muncipality_id' => $munciplaity,
@@ -164,7 +164,7 @@ class ReportsController extends Controller
                     'ethinic_group' => $validated['information_provider_caste'],
                     'mother_tongue' => $validated['information_provider_mother_tongue'],
                     'religion' => $validated['religion'],
-                    'created_by' => $validated['created_by']
+                    'created_by' => Auth::id(),
                 ]);
 
                 if ($validated['type'] == 'current') {
@@ -198,8 +198,8 @@ class ReportsController extends Controller
 
                         'second_marriage_done_by' => $validated['remarried_gender'],
                         'only_elder_at_home_due_to_foreign_employment' => $validated['is_elder_only_home'],
-                        'is_children_sent_to_boarding_school_in_headquarters_or_other_city' => $validated['is_children_out_for_study'],
-                        'children_sent_to_boarding_school_in_headquarters_or_other_city' => $validated['children_out_for_study'],
+                        'is_children_sent_to_other_city' => $validated['is_children_out_for_study'],
+                        'children_sent_to_other_city' => $validated['children_out_for_study'],
                         'is_amount_sent_at_home_last_1_year' => $validated['have_send_money'],
                         'reason_for_not_sending_money' => $validated['money_not_send_problem'],
                         'times_money_sent_home_last_1_year' => $validated['remittance_count'],
