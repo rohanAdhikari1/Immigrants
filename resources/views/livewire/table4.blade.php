@@ -15,15 +15,13 @@
                 <table class="table-auto text-[13px] text-center border-collapse border border-gray-300 w-full">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th rowspan="2" class="border border-gray-300 py-1">वडा
+                            <th class="border border-gray-300 py-1">वडा
                                 नम्बर</th>
-                            <th colspan="2" class="border border-gray-300 py-1">जनसंख्या
+                            <th class="border border-gray-300 py-1">वैदेशिक रोजगारमा गएकाहरु मात्र घरधुरी संख्या
                             </th>
-                            <th rowspan="2" class="border border-gray-300 py-1">जम्मा</th>
-                        </tr>
-                        <tr>
-                            <th class="border border-gray-300 py-1">पुरुष</th>
-                            <th class="border border-gray-300 py-1">महिला</th>
+                            <th class="border border-gray-300 py-1">वैदेशिक रोजगारबाट फर्केका आएका मात्र घरधुरी संख्या
+                            </th>
+                            <th class="border border-gray-300 py-1">जम्मा</th>
                         </tr>
                     </thead>
                     <tbody>

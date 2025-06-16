@@ -25,4 +25,9 @@ class Household extends Model
         'family_members_other_count',
         'created_by',
     ];
+
+    public function migrantWorkers()
+    {
+        return $this->hasMany(CurrentMigrantWorker::class, 'household_id');
+    }
 }

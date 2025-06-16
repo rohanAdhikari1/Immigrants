@@ -15,35 +15,29 @@
                 <table class="table-auto text-[13px] text-center border-collapse border border-gray-300 w-full">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th rowspan="2" class="border border-gray-300 py-1">वडा
-                                नम्बर</th>
-                            <th colspan="2" class="border border-gray-300 py-1">जनसंख्या
+                            <th class="border border-gray-300 py-1">क्र.स</th>
+                            <th class="border border-gray-300 py-1">देश</th>
+                            <th class="border border-gray-300 py-1">गएको व्यक्ति
                             </th>
-                            <th rowspan="2" class="border border-gray-300 py-1">जम्मा</th>
-                        </tr>
-                        <tr>
-                            <th class="border border-gray-300 py-1">पुरुष</th>
-                            <th class="border border-gray-300 py-1">महिला</th>
+                            <th class="border border-gray-300 py-1">प्रतिशत %</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($wards as $ward)
+                        @foreach ($countryData as $country => $data)
                             <tr>
-                                <td class="border border-gray-300 py-1">{{ $ward }}</td>
-                                <td class="border border-gray-300 py-1">{{ $wardWiseDataMale[$ward] }}</td>
-                                <td class="border border-gray-300 py-1">{{ $wardWiseDataFemale[$ward] }}</td>
-                                <td class="border border-gray-300 py-1">
-                                    {{ $wardWiseDataMale[$ward] + $wardWiseDataFemale[$ward] }}</td>
+                                <td class="border border-gray-300 py-1">{{ $loop->iteration }}</td>
+                                <td class="border border-gray-300 py-1">{{ $country }}</td>
+                                <td class="border border-gray-300 py-1">{{ $data }}</td>
+                                <td class="border border-gray-300 py-1">{{ $countryPercentage[$country] }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th class="border border-gray-300 py-1">जम्मा</th>
-                            <th class="border border-gray-300 py-1">{{ array_sum($wardWiseDataMale) }}</th>
-                            <th class="border border-gray-300 py-1">{{ array_sum($wardWiseDataFemale) }}</th>
+                            <th colspan="2" class="border border-gray-300 py-1">जम्मा</th>
+                            <th class="border border-gray-300 py-1">{{ array_sum($countryData) }}</th>
                             <th class="border border-gray-300 py-1">
-                                {{ array_sum($wardWiseDataMale) + array_sum($wardWiseDataFemale) }}</th>
+                                {{ array_sum($countryPercentage) }}</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -60,16 +54,10 @@
             type: 'bar',
             data: {
                 datasets: [{
-                        label: 'पुरुष',
-                        data: @json($this->wardWiseDataMale),
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'महिला',
-                        data: @json($this->wardWiseDataFemale),
-                        borderWidth: 1
-                    }
-                ]
+                    label: 'देश',
+                    data: @json($this->countryData),
+                    borderWidth: 1
+                }, ]
             },
             options: {
                 responsive: true,
@@ -81,14 +69,13 @@
                 }
             }
         });
-
         new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: ['पुरुष', 'महिला'],
+                labels: Object.keys(@json($this->countryPercentage)),
                 datasets: [{
                     label: 'जनसंख्या',
-                    data: [{{ array_sum($wardWiseDataMale) }}, {{ array_sum($wardWiseDataFemale) }}],
+                    data: Object.values(@json($this->countryPercentage)),
                     borderWidth: 1,
                     hoverOffset: 4
                 }],
