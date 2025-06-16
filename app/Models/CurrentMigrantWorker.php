@@ -49,4 +49,21 @@ class CurrentMigrantWorker extends Model
         'municipality_id',
         'created_by',
     ];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function household()
+    {
+        return $this->belongsTo(Household::class, 'household_id');
+    }
+    public function informationProvider()
+    {
+        return $this->belongsTo(InformationProvider::class, 'information_provider_id');
+    }
+    public function municipality()
+    {
+        return $this->belongsTo(Muncipality::class, 'municipality_id');
+    }
 }

@@ -24,6 +24,10 @@
                     <livewire:table2 />
                 @break
 
+                @case('table3')
+                    <livewire:table3 />
+                @break
+
                 @default
                     <div>
                         <div class="mx-auto py-3 text-center font-semibold">

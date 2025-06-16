@@ -143,17 +143,17 @@ class CurrentMigrantWorkerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('household_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('information_provider_id')
-                    ->numeric()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('household_id')
+                //     ->numeric()
+                //     ->sortable(),
+                // Tables\Columns\TextColumn::make('information_provider_id')
+                //     ->numeric()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('number_of_person')
-                    ->numeric()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('number_of_person')
+                //     ->numeric()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('age')
                     ->numeric()
                     ->sortable(),
@@ -223,16 +223,18 @@ class CurrentMigrantWorkerResource extends Resource
                 Tables\Columns\TextColumn::make('plan_after_return')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('latitude')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('longitude')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('municipality_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_by')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('municipality.name')
+                    ->label('Municipality')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('creator.name')
+                    ->label('Created By'),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

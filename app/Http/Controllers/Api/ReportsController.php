@@ -175,7 +175,7 @@ class ReportsController extends Controller
                         'name' => $validated['name'],
                         'gender' => $validated['gender'],
                         'age' => $validated['age'],
-                        'marital_status' =>  $validated['marital_status'],
+                        'maritial_status' =>  $validated['marital_status'],
                         'foreign_country' => $validated['migrated_country'],
                         'relation_to_hr' => $validated['relation_to_hr'],
                         'number_of_times_fe' => $validated['migrated_times'],
