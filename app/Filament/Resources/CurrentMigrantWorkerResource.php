@@ -167,6 +167,7 @@ class CurrentMigrantWorkerResource extends Resource
                 Tables\Columns\TextColumn::make('foreign_country')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('number_of_times_fe')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mode_of_travel')
                     ->searchable(),
@@ -175,52 +176,76 @@ class CurrentMigrantWorkerResource extends Resource
                 Tables\Columns\TextColumn::make('visa_type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('documents_left_on_home')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('skill_training_before_foreign_employment')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\IconColumn::make('received_information_or_counseling_before_foreign_employment')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('amount_paid_for_foreign_employment')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('major_source_of_amount_paid')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('current_job_abroad')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('problems_faced_during_foreign_employment')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('problems_faced_during_foreign_employment_type')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('family_problems_during_foreign_employment')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('family_problems_during_foreign_employment_type')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('second_marriage_done_by')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('only_elder_at_home_due_to_foreign_employment')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_children_sent_to_other_city')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('children_sent_to_other_city')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_amount_sent_at_home_last_1_year')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('reason_for_not_sending_money')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('times_money_sent_home_last_1_year')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('amount_sent_home_last_1_year')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('remittance_expenditure_last_1_year')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('place_of_purchase_of_house_or_land_from_remittance')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('place_of_saving_remittance')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('place_of_receiving_money_from_abroad')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('migration_plan_location')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('plan_after_return')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('latitude')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -229,9 +254,8 @@ class CurrentMigrantWorkerResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('municipality.name')
-                    ->label('Municipality')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('creator.name')
+                    ->label('Municipality'),
+                Tables\Columns\TextColumn::make('creator.first_name')
                     ->label('Created By'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -248,6 +272,7 @@ class CurrentMigrantWorkerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

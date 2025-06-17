@@ -157,6 +157,7 @@ class ReturnedMigrantWorkerResource extends Resource
                 Tables\Columns\TextColumn::make('reason_for_returning_from_foreign_employment')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('disability_or_incapacity_due_to_foreign_employment')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type_of_work_done_abroad')
                     ->searchable(),
@@ -167,6 +168,7 @@ class ReturnedMigrantWorkerResource extends Resource
                 Tables\Columns\TextColumn::make('current_occupation')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type_of_own_business')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('challenges_in_starting_new_business')
                     ->searchable(),
@@ -175,22 +177,31 @@ class ReturnedMigrantWorkerResource extends Resource
                 Tables\Columns\TextColumn::make('desired_or_current_work_area_in_nepal')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('requirements_for_employment_in_nepal')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('post_foreign_employment_family_issues')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('post_foreign_employment_family_issues_type')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('post_foreign_employment_family_issues_type_other')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('post_foreign_employment_health_issues')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('post_foreign_employment_health_issues_type')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('post_foreign_employment_health_issues_type_other')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('post_foreign_employment_social_or_family_accusations')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('post_foreign_employment_social_or_family_accusations_type')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('latitude')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -199,9 +210,8 @@ class ReturnedMigrantWorkerResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('municipality.name')
-                    ->label('Municipality')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('creator.name')
+                    ->label('Municipality'),
+                Tables\Columns\TextColumn::make('creator.first_name')
                     ->label('Created By'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -217,6 +227,7 @@ class ReturnedMigrantWorkerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
