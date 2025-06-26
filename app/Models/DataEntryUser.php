@@ -23,4 +23,14 @@ class DataEntryUser extends User
     {
         return $this->belongsTo(User::class, 'id');
     }
+
+    public function currentMigrantWorkers()
+    {
+        return $this->hasMany(CurrentMigrantWorker::class, 'created_by', 'id');
+    }
+
+    public function returnedMigrantWorkers()
+    {
+        return $this->hasMany(ReturnedMigrantWorker::class, 'created_by', 'id');
+    }
 }

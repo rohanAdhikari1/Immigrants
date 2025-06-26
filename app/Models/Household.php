@@ -26,8 +26,18 @@ class Household extends Model
         'created_by',
     ];
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
     public function migrantWorkers()
     {
         return $this->hasMany(CurrentMigrantWorker::class, 'household_id');
+    }
+
+    public function municipality()
+    {
+        return $this->belongsTo(Muncipality::class, 'muncipality_id');
     }
 }

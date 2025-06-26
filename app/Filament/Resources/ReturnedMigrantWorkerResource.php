@@ -135,9 +135,12 @@ class ReturnedMigrantWorkerResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('number_of_person')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('household.ward_no')
+                    ->label('Ward No')
+                    ->searchable(),
+                // Tables\Columns\TextColumn::make('number_of_person')
+                //     ->numeric()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('age')
                     ->numeric()
                     ->sortable(),

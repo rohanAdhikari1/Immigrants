@@ -90,6 +90,10 @@
                     <livewire:returned-migrant-worker-maritial-report />
                 @break
 
+                @case('table13')
+                    <livewire:home-return-duration-report />
+                @break
+
                 @case('table14')
                     <livewire:migrant-return-reason-report />
                 @break
@@ -100,6 +104,14 @@
 
                 @case('table16')
                     <livewire:skill-training-after-resturn-report />
+                @break
+
+                @case('table17')
+                    <livewire:returned-migrant-want-to-return-report />
+                @break
+
+                @case('table18')
+                    <livewire:returned-migrant-current-occupation-report />
                 @break
 
                 @default

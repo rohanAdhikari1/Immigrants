@@ -17,6 +17,31 @@ class ReportsController extends Controller
 {
     public function save(Request $request)
     {
+        $ward_no = $request->get('ward_no');
+        $house_no = $request->get('house_no');
+        $nepaliToEnglishMap = [
+            '०' => '0',
+            '१' => '1',
+            '२' => '2',
+            '३' => '3',
+            '४' => '4',
+            '५' => '5',
+            '६' => '6',
+            '७' => '7',
+            '८' => '8',
+            '९' => '9'
+        ];
+        if (preg_match('/[०-९]/', $ward_no)) {
+            $ward_no = strtr($ward_no, $nepaliToEnglishMap);
+        }
+        if (preg_match('/[०-९]/', $house_no)) {
+            $house_no = strtr($house_no, $nepaliToEnglishMap);
+        }
+        $request->merge([
+            'ward_no' => $ward_no,
+            'house_no' => $house_no,
+        ]);
+
         $validated = $request->validate([
             //step first
             'type' => 'required',
@@ -416,28 +441,28 @@ class ReportsController extends Controller
     //     'famer_phone' => 'nullable|numeric',
     //     'farmer_registration_no' => 'required|numeric',
     //     'famer_name' => 'required',
-    //     // 'farmer_ward' => [
-    //     //     'required',
-    //     //     function ($attribute, $value, $fail) {
-    //     //         $nepaliToEnglishMap = [
-    //     //             '०' => '0',
-    //     //             '१' => '1',
-    //     //             '२' => '2',
-    //     //             '३' => '3',
-    //     //             '४' => '4',
-    //     //             '५' => '5',
-    //     //             '६' => '6',
-    //     //             '७' => '7',
-    //     //             '८' => '8',
-    //     //             '९' => '9'
-    //     //         ];
-    //     //         if (preg_match('/[०-९]/', $value)) {
-    //     //             $value = strtr($value, $nepaliToEnglishMap);
-    //     //         }
-    //     //         if (!is_numeric($value)) {
-    //     //             $fail($attribute . ' must be a valid number.');
-    //     //         }
-    //     //     }
-    //     // ],
+    // 'farmer_ward' => [
+    //     'required',
+    //     function ($attribute, $value, $fail) {
+    //         $nepaliToEnglishMap = [
+    //             '०' => '0',
+    //             '१' => '1',
+    //             '२' => '2',
+    //             '३' => '3',
+    //             '४' => '4',
+    //             '५' => '5',
+    //             '६' => '6',
+    //             '७' => '7',
+    //             '८' => '8',
+    //             '९' => '9'
+    //         ];
+    //         if (preg_match('/[०-९]/', $value)) {
+    //             $value = strtr($value, $nepaliToEnglishMap);
+    //         }
+    //         if (!is_numeric($value)) {
+    //             $fail($attribute . ' must be a valid number.');
+    //         }
+    //     }
+    // ],
     // ]);
 }

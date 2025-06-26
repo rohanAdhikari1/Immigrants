@@ -151,6 +151,9 @@ class CurrentMigrantWorkerResource extends Resource
                 //     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('household.ward_no')
+                    ->label('Ward No')
+                    ->searchable(isIndividual: true),
                 // Tables\Columns\TextColumn::make('number_of_person')
                 //     ->numeric()
                 //     ->sortable(),
@@ -254,9 +257,11 @@ class CurrentMigrantWorkerResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('municipality.name')
-                    ->label('Municipality'),
+                    ->label('Municipality')
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('creator.first_name')
-                    ->label('Created By'),
+                    ->label('Created By')
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->dateTime()
@@ -270,6 +275,8 @@ class CurrentMigrantWorkerResource extends Resource
             ->filters([
                 //
             ])
+            ->deferLoading()
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

@@ -79,8 +79,7 @@ class HouseholdResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('muncipality_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('municipality.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ward_no')
                     ->numeric()
@@ -116,9 +115,8 @@ class HouseholdResource extends Resource
                 Tables\Columns\TextColumn::make('family_members_other_count')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_by')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('creator.first_name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

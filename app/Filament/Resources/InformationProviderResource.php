@@ -58,9 +58,7 @@ class InformationProviderResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('religion')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_by')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('creator.first_name'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
